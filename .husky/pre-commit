@@ -1,0 +1,7 @@
+echo "begin to pre-commit"
+
+echo "begin to type-check"
+npm run type-check
+echo "success!"
+
+echo "pre-commit success"
