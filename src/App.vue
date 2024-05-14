@@ -13,13 +13,17 @@ import { Select as ASelect } from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 import ColorWheel from './components/ColorWheel.vue';
 import ColorRing from './components/ColorRing.vue';
+import ColorTemperature from './components/ColorTemperature.vue';
+import BlackWhite from './components/BlackWhite.vue';
+import Rhythm from './components/Rhythm.vue';
 
-const type = ref(1);
+const type = ref(2);
 const options = [
     { label: '色盘', value: 0 },
     { label: '色环', value: 1 },
     { label: '色温', value: 2 },
-    { label: '律动', value: 3 }
+    { label: '黑白', value: 3 },
+    { label: '律动', value: 4 }
 ];
 const comp = computed(() => {
     switch (type.value) {
@@ -27,6 +31,12 @@ const comp = computed(() => {
             return ColorWheel;
         case 1:
             return ColorRing;
+        case 2:
+            return ColorTemperature;
+        case 3:
+            return BlackWhite;
+        case 4:
+            return Rhythm;
         default:
             return ColorWheel;
     }
