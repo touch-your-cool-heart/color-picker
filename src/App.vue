@@ -17,7 +17,7 @@ import ColorTemperature from './components/ColorTemperature.vue';
 import BlackWhite from './components/BlackWhite.vue';
 import Rhythm from './components/Rhythm.vue';
 
-const type = ref(2);
+const type = ref(4);
 const options = [
     { label: '色盘', value: 0 },
     { label: '色环', value: 1 },
@@ -47,9 +47,17 @@ const comp = computed(() => {
 .type-wrapper {
     display: flex;
     justify-content: center;
-    margin: 20px 0 40px;
+    padding-top: 20px;
+    margin-bottom: 40px;
     .ant-select {
         width: 100px;
     }
 }
+</style>
+<style>
+    body {
+        overflow: hidden;
+        background: url('./assets/light_background.png');
+        background-size: cover;
+    }
 </style>
