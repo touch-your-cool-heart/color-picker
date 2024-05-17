@@ -15,7 +15,7 @@
                     ></div>
                 </div>
                 <div class="line-wrapper">
-                    <div class="line-item" v-for="n in LINEAR_BAR_NUM" :key="n" :style="{ height: `${linearHeightArr[n - 1]}px` }"></div>
+                    <div :class="{ 'line-item': true, active: play }" v-for="n in LINEAR_BAR_NUM" :key="n" :style="{ height: `${linearHeightArr[n - 1]}px` }"></div>
                 </div>
             </div>
         </div>
@@ -65,42 +65,27 @@ const linearHeightArr = [1, 2, 3, 4, 5, 4, 3, 2, 1].map((v) => v * 3);
 // 播放
 const timer = ref(0);
 const count = ref(0);
+const play = ref(false);
 const handlePlay = () => {
+    play.value = true;
     timer.value = setInterval(() => {
         count.value++;
         if (count.value % 3 === 0) {
             getElementIndex();
         }
         console.log(elementIndex);
-        const circleEles = resetCircle();
+        circleHeightArr.value.forEach((_v, i) => (circleHeightArr.value[i] = 0));
         elementIndex.forEach((v) => {
-            const ele = circleEles[v];
-            if (!ele) return;
             circleHeightArr.value[v] = Math.random() * 10 + 3;
-            ele.classList.add('active');
         });
     }, 300);
-    const eles = document.querySelectorAll('.line-item');
-    eles.forEach((ele) => ele.classList.add('active'));
-};
-// 重置环形柱子
-const resetCircle = () => {
-    const eles = document.querySelectorAll('.circle-item');
-    eles.forEach((ele) => ele.classList.remove('active'));
-    circleHeightArr.value.forEach((_v, i) => (circleHeightArr.value[i] = 0));
-    return eles;
-};
-// 重置线性柱子
-const resetLine = () => {
-    const eles = document.querySelectorAll('.line-item');
-    eles.forEach((ele) => ele.classList.remove('active'));
 };
 
 // 停止
 const handleStop = () => {
+    play.value = false;
+    circleHeightArr.value.forEach((_v, i) => (circleHeightArr.value[i] = 0));
     clearInterval(timer.value);
-    resetCircle();
-    resetLine();
 };
 onUnmounted(handleStop);
 </script>
@@ -143,18 +128,12 @@ onUnmounted(handleStop);
                         top: 0;
                         transform: translateY(-95%);
                         width: 100%;
-                        height: 0;
+                        // height: 0;
+                        height: var(--height);
                         border-top-left-radius: 1px;
                         border-top-right-radius: 1px;
                         background: var(--bgc);
                         transition: all 400ms;
-                    }
-                    &.active {
-                        border-top-left-radius: 0;
-                        border-top-right-radius: 0;
-                        &::before {
-                            height: var(--height);
-                        }
                     }
                 }
             }
