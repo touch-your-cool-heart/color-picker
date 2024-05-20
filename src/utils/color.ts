@@ -2,8 +2,8 @@ import convert from 'color-convert';
 
 type RGB = [number, number, number];
 
-export function hueToRgb(hue: number) {
-    const hsv: RGB = [hue, 100, 100];
+export function hueToRgb(hue: number, saturation = 100) {
+    const hsv: RGB = [hue, saturation, 100];
     return convert.hsv.rgb(hsv);
 }
 

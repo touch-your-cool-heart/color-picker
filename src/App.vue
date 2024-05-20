@@ -17,7 +17,7 @@ import ColorTemperature from './components/ColorTemperature.vue';
 import BlackWhite from './components/BlackWhite.vue';
 import Rhythm from './components/Rhythm.vue';
 
-const type = ref(4);
+const type = ref(0);
 const options = [
     { label: '色盘', value: 0 },
     { label: '色环', value: 1 },
